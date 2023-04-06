@@ -20,8 +20,10 @@ export default function SearchResult() {
     <div>
         <Topbar/>
         <div className="searchContainer">
+         
         <Sidebar/>
-   <Feed data={searchResult}/>
+        
+   <Feed data={searchResult} label={{show: true, text: searchValue}}/>
    <Rightbar/>
    </div>
     </div>

@@ -5,13 +5,14 @@ import { useState } from "react";
 
 
 
-export default function Feed({data}) {
- 
+export default function Feed({data: vacantions = [], label = {show:false}}) {
 
   return (
     <div className="feedContainer">
-      
- {data.map(vacantion => <WorkCard vacantion = {vacantion} key={vacantion.id}/>)}
+      {label.show && <h2>Your request: "{label.text}"</h2>}
+      {vacantions.length !== 0 && vacantions.map(vacantion => <WorkCard vacantion = {vacantion} key={vacantion.id}/>)}
+      {vacantions.length === 0 && <h1>No data was found!!!</h1>}
+
     </div>
   )
 }

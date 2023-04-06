@@ -2,7 +2,7 @@ import "./topbar.css"
 import { Search, Person, AccountCircle, Refresh } from "@mui/icons-material"
 import { useEffect, useState } from "react";
 import Feed from "../feed/Feed";
-import { Navigate, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 export default function Topbar() {
   let searchValue
