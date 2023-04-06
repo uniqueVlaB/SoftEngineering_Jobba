@@ -1,0 +1,20 @@
+.workCard{
+cursor: pointer;
+border: solid black 2px;
+border-radius: 20px;
+padding: 10px;
+margin: 10px;
+color: black;
+align-content: end;
+}
+.workCardh2{
+margin-bottom: 10px;   
+}
+.workCardh3{
+margin-bottom: 10px;
+
+}
+.workCardListItem{
+margin-bottom: 5px;
+
+}

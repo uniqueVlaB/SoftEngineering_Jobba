@@ -1,0 +1,60 @@
+.topbarContainer{
+height: 50px;
+width: 100%;
+background-color: black;
+display: flex;
+align-items: center;
+position: sticky;
+top:0;
+}
+.logo{
+ font-size: 32px;
+ margin-left: 20px; 
+ color:white;  
+ cursor: pointer;
+
+}
+
+.topbarLeft{
+    flex:3;
+}
+.topbarCenter{
+    flex:6;
+}
+.searchbar{
+border-radius: 20px;
+background-color: white;
+height: 30px;
+display: flex;
+
+}
+.searchIcon{
+    font-size: 20px !important;
+    margin-left: 5px;
+    align-self: center;
+}
+.searchInput{
+  border: none;
+  width: 70%;  
+  outline: none;
+}
+.topbarRight{
+    flex:3;
+    align-items:center;
+    justify-content:space-around;
+    color: white;
+}
+
+.topbarAccountIcon{
+cursor: pointer;
+float: right;
+margin-right: 10px;
+
+}
+.accountCircle{
+    font-size: 40px !important;
+}
+
+.accountLoginState{
+align-self: center;   
+}
