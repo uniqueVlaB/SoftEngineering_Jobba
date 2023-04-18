@@ -18,6 +18,9 @@ export default function Card({vacantion}){
   {vacantion.description === "" || vacantion.description === " " ?"Unknown": vacantion.description}
    
   </h3>
+  <h4>
+    {vacantion.category.name}
+  </h4>
   
      
   </div>

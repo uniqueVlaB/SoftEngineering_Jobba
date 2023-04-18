@@ -3,6 +3,7 @@ import { Search, Person, AccountCircle, Refresh } from "@mui/icons-material"
 import { useEffect, useState } from "react";
 import Feed from "../feed/Feed";
 import {useNavigate } from "react-router-dom";
+import { authData } from "../../authentication/authData";
 
 export default function Topbar() {
   let searchValue
@@ -57,7 +58,7 @@ export default function Topbar() {
 
 
 <div className="topbarAccountIcon">
-<span className="accountLoginState">You are logged in</span>
+<span className="accountLoginState">{authData.userName}</span>
   <AccountCircle className="accountCircle"/>
 </div>
 </div>
