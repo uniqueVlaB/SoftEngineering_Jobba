@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './workCard.css';
 
-export default function Card({vacantion}){
+export default function Card({vacancy}){
     const [showMore, setShowMore] = useState(false);
   
     function handleMoreClick() {
@@ -11,15 +11,15 @@ export default function Card({vacantion}){
   return(
   <div className='workCard'>
   <h2 className='workCardh2'>
-    {vacantion.header === "" || vacantion.header === " " ?"Unknown": vacantion.header}
+    {vacancy.header === "" || vacancy.header === " " ?"Unknown": vacancy.header}
   </h2>
   <h3 className='workCardh3'>
     
-  {vacantion.description === "" || vacantion.description === " " ?"Unknown": vacantion.description}
+  {vacancy.description === "" || vacancy.description === " " ?"Unknown": vacancy.description}
    
   </h3>
   <h4>
-    {vacantion.category.name}
+    {vacancy.category.name}
   </h4>
   
      

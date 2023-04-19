@@ -1,18 +1,21 @@
 import "./feed.css"
 import WorkCard from "../../components/workCard/WorkCard"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useState } from "react";
 
+export default function Feed({data: vacancies = {items: []}, label = {show:false}, children}) {
+  const feedRef = useRef(null);
 
-
-export default function Feed({data: vacantions = {items: []}}, label = {show:false}) {
+  useEffect(() => {
+    feedRef.current.scrollTop = 0;
+  }, [vacancies]);
 
   return (
-    <div className="feedContainer">
+    <div className="feedContainer" ref={feedRef}> 
       {label.show && <h2>Your request: "{label.text}"</h2>}
-      {vacantions.items.length !== 0 && vacantions.items.map(vacantion => <WorkCard vacantion = {vacantion} key={vacantion.id}/>)}
-      {vacantions.items.length === 0 && <h1>No data was found!!!</h1>}
-
+      {vacancies.items.length !== 0 && vacancies.items.map(vacancy => <WorkCard vacancy = {vacancy} key={vacancy.id}/>)}
+      {vacancies.items.length === 0 && <h1>No data was found!!!</h1>}
+      {children}
     </div>
   )
 }
