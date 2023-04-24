@@ -4,28 +4,76 @@ import Feed from '../../components/feed/Feed'
 import { useState, useEffect } from "react"
 import Sidebar from '../../components/sidebar/Sidebar'
 import Rightbar from '../../components/rightbar/Rightbar'
+import Listing from '../../components/pagination/Pagination'
+import { authData } from '../../authentication/authData'
+import { Login } from '../../authentication/authActions'
 
 export default function SearchResult() {
    let searchValue = localStorage.getItem("searchValue")
-    const [searchResult, setResult] = useState();
-   useEffect(() => {
-     fetch('https://localhost:7184/vacancy/search/' + searchValue,{
-       method:'GET',
-       headers:{"Authorization":"Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4OTYwZmJmYy0zZWFjLTQ4OTEtYjk5OC1iZTA2YjExYjNhNDEiLCJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmF0b3IiLCJuYmYiOjE2ODE4MzI1ODcsImV4cCI6MTY4MTkxODk4NywiaXNzIjoiSldQQVBJIiwiYXVkIjoiU2FtcGxlQXVkaWVuY2UifQ.95YdPB_MacFqZW8zZJ7JuH6lE9LBDNKJj8xCH00_1Ec",
-       }
-   })
-     .then(response => response.json())
-     .then(data => setResult(data))
-     }, []);
+    const [searchResult, setResult] = useState({totalItems:null, totalPages:null, items:[]});
+    const [page, setPage] = useState(1); 
+    const [itemsPerPage, setItemsPerPage] = useState(8);
+    const [categoryId, setCategoryId] = useState(0);
+    useEffect(() => {
+      (async () => {
+        await fetch('https://localhost:7159/api/Vacancies?'+ new URLSearchParams({
+          CategoryId:categoryId,
+          Page:page,
+          Header: searchValue,
+          ItemsPerPage: itemsPerPage
+        }),{
+          method:'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          setResult(data)
+
+        })
+        
+      })();
+    }, [page,itemsPerPage, categoryId]);
+
+    if(!authData.loginState)
+    Login({email: "admin@test.com", password: "12345678"});
+
+    const handleNextPage = (numPages) => {
+      if(searchResult.totalPages !== page) {
+        setPage(page+numPages);
+      }
+    }
+  
+    const handlePrevPage = (numPages) => {
+      if(page !== 1) {
+        setPage(page - numPages);
+      }
+    }
+    const handleSetPage = (numPages) => {
+      if(numPages > 0 && searchResult.totalPages >= numPages) {
+        setPage(numPages);
+      }
+    }
+    const handleCategoryChange = (categoryId) => {
+      if(categoryId!==null)
+        setCategoryId(categoryId);
+      
+    }
   return (
     <div>
         <Topbar/>
         <div className="searchContainer">
-         
         <Sidebar/>
-        
-   <Feed data={searchResult} label={{show: true, text: searchValue}}/>
-   <Rightbar/>
+   <Feed data={searchResult} label={{show: true, text: searchValue}}>
+   <Listing
+            onPrevPageClick={handlePrevPage}
+            onNextPageClick={handleNextPage}
+            setPage={handleSetPage}
+            currentPage={page}
+            totalPages={searchResult.totalPages}
+          />
+        </Feed>
+        <Rightbar
+         categoryChange={handleCategoryChange}
+        />
    </div>
     </div>
   )

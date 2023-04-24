@@ -1,3 +1,5 @@
 export let authData = {
-    userName:"Unknown"
+    loginState:false,
+    userName:"Unknown",
+    token:"",
 }

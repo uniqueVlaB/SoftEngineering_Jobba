@@ -1,6 +1,6 @@
 import { authData } from "./authData";
 
-export function setAuthData({email, password}){
+export function Login({email, password}){
     (async () => {
         const rawResponse = await fetch('https://localhost:7159/api/login', {
           method: 'POST',

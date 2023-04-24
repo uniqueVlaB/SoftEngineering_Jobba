@@ -5,7 +5,7 @@ import Feed from "../feed/Feed";
 import {useNavigate } from "react-router-dom";
 import { authData } from "../../authentication/authData";
 
-export default function Topbar() {
+export default function Topbar(props) {
   let searchValue
   const search = useInput();
   const navigate = useNavigate();
@@ -24,6 +24,18 @@ export default function Topbar() {
     if(window.location.pathname !== "/")
     navigate("/")
     else window.location.reload()
+
+  }
+
+  const handleAccountClick=()=>{
+    if(authData.loginState){
+      //---redirect to accout page
+     // navigate("/")
+    }
+    else{
+       //---redirect to login page
+     // navigate("/")
+    }
 
   }
   
@@ -57,8 +69,8 @@ export default function Topbar() {
 {search.value}
 
 
-<div className="topbarAccountIcon">
-<span className="accountLoginState">{authData.userName}</span>
+<div className="topbarAccountIcon" onClick={handleAccountClick}>
+<span className="accountLoginState">{authData.loginState && authData.userName}{!authData.loginState&& "Log in"}</span>
   <AccountCircle className="accountCircle"/>
 </div>
 </div>

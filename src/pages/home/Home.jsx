@@ -5,31 +5,40 @@ import Feed from '../../components/feed/Feed'
 import Rightbar from '../../components/rightbar/Rightbar'
 import { useState, useEffect } from "react"
 import { authData } from "../../authentication/authData"
-import { setAuthData } from "../../authentication/authActions"
+import { Login } from "../../authentication/authActions"
 import { useNavigate } from "react-router-dom"
 import { useRef } from "react";
 import Listing from "../../components/pagination/Pagination"
 
-export default function Home() {
+export default function Home(props) {
   const [vacancies, setVacancies] = useState({totalItems:null, totalPages:null, items:[]});
   const [page, setPage] = useState(1); 
+  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [categoryId, setCategoryId] = useState(0);
+
 
   useEffect(() => {
     (async () => {
       await fetch('https://localhost:7159/api/Vacancies?'+ new URLSearchParams({
-        CategoryId:'0',
-        Page:page.toString(),
-        ItemsPerPage:'7'
+        CategoryId:categoryId,
+        Page:page,
+        Header: "",
+        ItemsPerPage: itemsPerPage
       }),{
         method:'GET',
       })
       .then(response => response.json())
-      .then(data => setVacancies(data))
+      .then(data => {
+      setVacancies(data)
+      if(data.totalPages === 0)
+      setPage(1)
+      })
+      
     })();
-  }, [page]);
+  }, [page,itemsPerPage, categoryId]);
   
   if(!authData.loginState)
-    setAuthData({email: "admin@test.com", password: "12345678"});
+    Login({email: "admin@test.com", password: "12345678"});
 
   const handleNextPage = (numPages) => {
     if(vacancies.totalPages !== page) {
@@ -42,6 +51,16 @@ export default function Home() {
       setPage(page - numPages);
     }
   }
+  const handleSetPage = (numPages) => {
+    if(numPages > 0 && vacancies.totalPages >= numPages) {
+      setPage(numPages);
+    }
+  }
+  const handleCategoryChange = (categoryId) => {
+    if(categoryId!==null)
+      setCategoryId(categoryId);
+    
+  }
 
   return (
     <>
@@ -52,11 +71,14 @@ export default function Home() {
           <Listing
             onPrevPageClick={handlePrevPage}
             onNextPageClick={handleNextPage}
+            setPage={handleSetPage}
             currentPage={page}
             totalPages={vacancies.totalPages}
           />
         </Feed>
-        <Rightbar/>
+        <Rightbar
+         categoryChange={handleCategoryChange}
+        />
       </div>
     </>
   )
