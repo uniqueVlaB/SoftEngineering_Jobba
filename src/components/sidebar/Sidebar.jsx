@@ -7,6 +7,9 @@ export default function Sidebar(props) {
   const handleHomeClick=()=>{
   navigate("/")
   }
+  const handleAccountClick=()=>{
+    navigate("/userPage")
+    }
   return (
     <div className="sidebarContainer">
      <div className="sidebarWrapper">
@@ -14,6 +17,10 @@ export default function Sidebar(props) {
       <li className="listPagesItem" onClick={handleHomeClick}>
         <Home className="listIcon"/>
         Home
+      </li>
+      <li className="listPagesItem" onClick={handleAccountClick}>
+        <Person className="listIcon"/>
+        Your vacancies
       </li>
      </ul>
      

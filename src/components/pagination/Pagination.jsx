@@ -30,7 +30,7 @@ export default function Listing(props) {
   {props.currentPage > 2 && <span className="listingNum" onClick={() => handleSetPage(props.currentPage-1)}>{props.currentPage-1}</span>}
   <span className="listingNum">{'>'+props.currentPage+'<'}</span>
   {(props.totalPages > props.currentPage && props.currentPage<props.totalPages-1) && <span className="listingNum" onClick={() => handleSetPage(props.currentPage+1)}>{props.currentPage+1}</span>}
-  {props.currentPage!== props.totalPages && props.totalPages!==0 &&<span className="listingNum" onClick={handleLastClick}>last</span>}
+  {props.currentPage!== props.totalPages && props.totalPages > 1 &&<span className="listingNum" onClick={handleLastClick}>last</span>}
 
 </div>
 <div className="listingRight" onClick={() => handleRightClick(1)}>

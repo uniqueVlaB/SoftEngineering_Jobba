@@ -47,6 +47,7 @@ export default function Topbar(props) {
       if(window.location.pathname !== "/SearchResult")
        navigate("/SearchResult")
        else window.location.reload()
+       
     }
   };
   return (
@@ -70,7 +71,7 @@ export default function Topbar(props) {
 
 
 <div className="topbarAccountIcon" onClick={handleAccountClick}>
-<span className="accountLoginState">{authData.loginState && authData.userName}{!authData.loginState&& "Log in"}</span>
+<span className="accountLoginState">{authData.loginState && "Log out"}{!authData.loginState&& "Log in"}</span>
   <AccountCircle className="accountCircle"/>
 </div>
 </div>

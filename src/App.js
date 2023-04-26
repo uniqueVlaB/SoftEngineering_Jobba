@@ -8,6 +8,7 @@ import {
   Link,
 } from "react-router-dom";
 import UserPage from "./pages/userPage/UserPage";
+import Edit from "./pages/edit/Edit";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,6 +26,10 @@ function App() {
       path: "UserPage",
       element: <UserPage/>,
     },
+    {
+      path: "Edit",
+      element: <Edit/>,
+    }
   ]);
  
   return (
