@@ -6,9 +6,11 @@ import { useState, useEffect } from "react"
 import { authData } from '../../authentication/authData'
 import { Login } from '../../authentication/authActions'
 import Listing from '../../components/pagination/Pagination'
+import { useNavigate } from 'react-router-dom'
 import './userPage.css'
 
 export default function UserPage() {
+    const navigate = useNavigate();
     const [userVacantions, setVacancies] = useState({totalItems:null, totalPages:null, items:[]});
     const [page, setPage] = useState(1); 
     const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -57,22 +59,32 @@ export default function UserPage() {
     const handleCategoryChange = (categoryId) => {
       if(categoryId!==null)
         setCategoryId(categoryId);
-      
     }
+    const handleAddButton = () => {
+      navigate("/add")
+    }
+
+
   return (
     <div>
         <Topbar/>
         <div className="userPageContainer">
          
         <Sidebar/>
-        
-   <Feed data={userVacantions} allowEdit = {true}>
+       
+   <Feed data={userVacantions} allowEdit = {true}
+    addButton = {
+    <button onClick={handleAddButton} className="addButton">
+   Add vacancy
+ </button>
+}>
+
    <Listing
             onPrevPageClick={handlePrevPage}
             onNextPageClick={handleNextPage}
             setPage={handleSetPage}
             currentPage={page}
-            totalPages={userVacantions.totalPages}
+            totalPages={userVacantions.totalPages} 
           />
         </Feed>
         <Rightbar

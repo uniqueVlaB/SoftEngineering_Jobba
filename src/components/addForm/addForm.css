@@ -31,7 +31,7 @@
     height: 30px;
     border: solid 2px black;
 }
-.formButton{
+.FormButton{
     display: flex;
     padding-left: 15px;
     margin-top: 30px;
@@ -42,9 +42,9 @@
   text-align: center;
   background-color: white;   
 }
-.formeButton:hover{
+.FormButton:hover{
     background-color:silver;
 }
-.formButton:active{
+.FormButton:active{
     background-color:darkgrey;
 }

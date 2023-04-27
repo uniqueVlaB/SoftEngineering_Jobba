@@ -2,6 +2,7 @@ import { Event } from '@mui/icons-material';
 import  './editForm.css'
 import { useState } from 'react';
 import { authData } from '../../authentication/authData';
+import SaveIcon from '@mui/icons-material/Save';
 
 export default function EditForm(props) {
     const[categoryId, setCategoryId] = useState(props.vacancy.category.id)
@@ -46,7 +47,12 @@ Category:
         {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
      </select>
      <div>
-         <button onClick={saveChanges} className='saveButton'>save</button>
+         <button onClick={saveChanges} className='formButton'>
+         <SaveIcon className='buttonIcon'/>
+             <div className="buttonText">Save</div>
+             </button>
+
+
      </div>
 
 </div>
