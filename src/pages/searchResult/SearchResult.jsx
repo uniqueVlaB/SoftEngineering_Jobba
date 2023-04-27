@@ -4,7 +4,7 @@ import Feed from '../../components/feed/Feed'
 import { useState, useEffect } from "react"
 import Sidebar from '../../components/sidebar/Sidebar'
 import Rightbar from '../../components/rightbar/Rightbar'
-import Listing from '../../components/pagination/Pagination'
+import Pagination from '../../components/pagination/Pagination'
 import { authData } from '../../authentication/authData'
 import { Login } from '../../authentication/authActions'
 
@@ -12,7 +12,7 @@ export default function SearchResult() {
    let searchValue = localStorage.getItem("searchValue")
     const [searchResult, setResult] = useState({totalItems:null, totalPages:null, items:[]});
     const [page, setPage] = useState(1); 
-    const [itemsPerPage, setItemsPerPage] = useState(8);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
     const [categoryId, setCategoryId] = useState(0);
     useEffect(() => {
       (async () => {
@@ -27,8 +27,9 @@ export default function SearchResult() {
         .then(response => response.json())
         .then(data => {
           setResult(data)
-
-        })
+          if(data.totalPages === 0 || data.totalPages < page)
+          setPage(1)
+          })
         
       })();
     }, [page,itemsPerPage, categoryId]);
@@ -62,8 +63,8 @@ export default function SearchResult() {
         <Topbar/>
         <div className="searchContainer">
         <Sidebar/>
-   <Feed data={searchResult} label={{show: true, text: searchValue}}>
-   <Listing
+   <Feed data={searchResult} label={{show: true, text: searchValue}} setItems={setItemsPerPage} numItemsPerPage = {itemsPerPage}>
+   <Pagination
             onPrevPageClick={handlePrevPage}
             onNextPageClick={handleNextPage}
             setPage={handleSetPage}

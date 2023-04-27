@@ -13,3 +13,34 @@ overflow-y: scroll;
     background-color: gray;
     border-radius: 10px;
 }
+.addButton{
+    width: calc(100% - 20px);
+    height: 60px;
+    margin-left: 10px;
+    margin-top: 5px;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
+.addButton:hover{
+    background-color: silver;
+}
+.addButton:active{
+    background-color: gray;
+}
+.itemsPerPageSelectContainer{
+    display: flex;
+}
+.itemsPerPageSelectLabel{
+    font-size: 18px;
+    font-weight: 600;
+}
+.itemsPerPageSelectValue{
+    margin-left: 20px;
+    font-size: 18px;
+}
+.itemsPerPageSelectValue:hover{
+    color: red;
+   font-size: 22px;
+}

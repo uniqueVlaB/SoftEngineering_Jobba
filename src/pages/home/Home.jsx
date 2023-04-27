@@ -8,12 +8,12 @@ import { authData } from "../../authentication/authData"
 import { Login } from "../../authentication/authActions"
 import { useNavigate } from "react-router-dom"
 import { useRef } from "react";
-import Listing from "../../components/pagination/Pagination"
+import Pagination from "../../components/pagination/Pagination"
 
 export default function Home(props) {
   const [vacancies, setVacancies] = useState({totalItems:null, totalPages:null, items:[]});
   const [page, setPage] = useState(1); 
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [categoryId, setCategoryId] = useState(0);
 
 
@@ -30,7 +30,7 @@ export default function Home(props) {
       .then(response => response.json())
       .then(data => {
       setVacancies(data)
-      if(data.totalPages === 0)
+      if(data.totalPages === 0 || data.totalPages < page)
       setPage(1)
       })
       
@@ -67,8 +67,8 @@ export default function Home(props) {
       <Topbar/>
       <div className="homeContainer">
         <Sidebar/>
-        <Feed data={vacancies}>
-          <Listing
+        <Feed data={vacancies} setItems={setItemsPerPage} numItemsPerPage = {itemsPerPage}>
+          <Pagination
             onPrevPageClick={handlePrevPage}
             onNextPageClick={handleNextPage}
             setPage={handleSetPage}

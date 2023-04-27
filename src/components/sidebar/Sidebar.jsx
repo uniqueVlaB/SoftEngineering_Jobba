@@ -5,7 +5,9 @@ import {useNavigate } from "react-router-dom";
 export default function Sidebar(props) {
   const navigate = useNavigate();
   const handleHomeClick=()=>{
-  navigate("/")
+    if(window.location.pathname !== "/")
+    navigate("/")
+    else window.location.reload()
   }
   const handleAccountClick=()=>{
     navigate("/userPage")
