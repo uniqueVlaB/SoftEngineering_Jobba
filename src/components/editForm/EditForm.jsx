@@ -9,7 +9,7 @@ export default function EditForm(props) {
     const [headerValue, setHeaderValue] = useState(props.vacancy.header);
     const [descriptionValue, setDescriptionValue] = useState(props.vacancy.description);
     const categories = JSON.parse(localStorage.getItem("categories"))
-
+    
  const saveChanges = async () =>{
      await fetch('https://localhost:7159/api/Vacancies/' + props.vacancy.id,{
         method:'PUT',
@@ -43,8 +43,8 @@ Description:
     <div className="fieldHeader">
 Category:
     </div>
-    <select  className='categorySelect' onChange={handleChange}>
-        {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+    <select  className='categorySelect' onChange={handleChange} defaultValue={categoryId}>
+        {categories.map(c => <option key={c.id} value={c.id} >{c.name}</option>)}
      </select>
      <div>
          <button onClick={saveChanges} className='formButton'>
@@ -59,4 +59,5 @@ Category:
     </div>
 
   )
+  
 }
