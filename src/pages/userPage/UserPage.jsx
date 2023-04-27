@@ -19,13 +19,18 @@ export default function UserPage() {
   
     useEffect(() => {
       (async () => {
-        await fetch('https://localhost:7159/api/Vacancies?'+ new URLSearchParams({
+        await fetch('https://localhost:7159/api/Vacancies/MyVacancies?'+ new URLSearchParams({
           CategoryId:categoryId,
           Page:page,
           Header: "",
           ItemsPerPage: itemsPerPage
         }),{
           method:'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer ' + authData.token
+          }
         })
         .then(response => response.json())
         .then(data => {

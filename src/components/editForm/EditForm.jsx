@@ -3,9 +3,11 @@ import  './editForm.css'
 import { useState } from 'react';
 import { authData } from '../../authentication/authData';
 import SaveIcon from '@mui/icons-material/Save';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditForm(props) {
-    const[categoryId, setCategoryId] = useState(props.vacancy.category.id)
+    const navigate = useNavigate()
+    const [categoryId, setCategoryId] = useState(props.vacancy.category.id)
     const [headerValue, setHeaderValue] = useState(props.vacancy.header);
     const [descriptionValue, setDescriptionValue] = useState(props.vacancy.description);
     const categories = JSON.parse(localStorage.getItem("categories"))
@@ -25,6 +27,7 @@ export default function EditForm(props) {
           })
       }).then(response => response.json())
       .then(data => console.log(data))
+navigate("/userPage")
 }
     const handleChange = (event) => {
        setCategoryId(event.target.value)

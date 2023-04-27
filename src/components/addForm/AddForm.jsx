@@ -2,13 +2,16 @@ import './addForm.css'
 import { useState } from 'react';
 import { authData } from '../../authentication/authData';
 import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function AddForm() {
-    const[categoryId, setCategoryId] = useState("")
+    const categories = JSON.parse(localStorage.getItem("categories"))
+    const navigate = useNavigate()
+    const[categoryId, setCategoryId] = useState(categories[0].id)
     const [headerValue, setHeaderValue] = useState("");
     const [descriptionValue, setDescriptionValue] = useState("");
-    const categories = JSON.parse(localStorage.getItem("categories"))
+   
 
  const addVacancy = async () =>{
     await fetch('https://localhost:7159/api/Vacancies',{
@@ -25,6 +28,7 @@ export default function AddForm() {
           })
       }).then(response => response.json())
       .then(data => console.log(data))
+      navigate("/userPage")
  }
  const handleChange = (event) => {
        setCategoryId(event.target.value)
