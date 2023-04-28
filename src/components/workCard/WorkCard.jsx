@@ -3,25 +3,22 @@ import './workCard.css';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { authData } from '../../authentication/authData';
+import { authData } from '../../models/authData';
+import { vacancy } from '../../models/vacancy';
+import { ApiDeleteVacancy } from '../../apiCalls/vacancies';
 
 export default function Card(props){
   const navigate = useNavigate()
     const [showMore, setShowMore] = useState(false);
   
     const handleEditClick = () => {
-      localStorage.setItem("vacancy", JSON.stringify(props.vacancy));
+     // localStorage.setItem("vacancy", JSON.stringify(props.vacancy));
+      vacancy = props.vacancy
       navigate("/edit")
     }
     const handleDeteteClick = async () =>{
-      await fetch('https://localhost:7159/api/Vacancies/' + props.vacancy.id,{
-         method:'DELETE',
-         headers: {
-             'Authorization':'Bearer ' + authData.token
-           },
-       }).then(response => console.log(response.status))
-
- }
+     ApiDeleteVacancy(props.vacancy) 
+   }
   return(
   <div className='workCard'>
     <div className="cardValues">

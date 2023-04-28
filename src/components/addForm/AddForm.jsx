@@ -1,12 +1,13 @@
 import './addForm.css'
 import { useState } from 'react';
-import { authData } from '../../authentication/authData';
+import { authData } from '../../models/authData';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
+import { ApiAddVacancy } from '../../apiCalls/vacancies';
 
 
 export default function AddForm() {
-    const categories = JSON.parse(localStorage.getItem("categories"))
+    const categories = JSON.parse(sessionStorage.getItem("categories"))
     const navigate = useNavigate()
     const[categoryId, setCategoryId] = useState(categories[0].id)
     const [headerValue, setHeaderValue] = useState("");
@@ -14,20 +15,7 @@ export default function AddForm() {
    
 
  const addVacancy = async () =>{
-    await fetch('https://localhost:7159/api/Vacancies',{
-        method:'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization':'Bearer ' + authData.token
-          },
-          body: JSON.stringify({
-            header: headerValue,
-            description: descriptionValue,
-            categoryId: categoryId
-          })
-      }).then(response => response.json())
-      .then(data => console.log(data))
+    ApiAddVacancy(headerValue, descriptionValue, categoryId)
       navigate("/userPage")
  }
  const handleChange = (event) => {
@@ -55,8 +43,6 @@ export default function AddForm() {
                 <AddIcon className='buttonIcon'/>
                  <div className="buttonText">Add</div>
                  </button>
-    
-    
          </div>
     
     </div>

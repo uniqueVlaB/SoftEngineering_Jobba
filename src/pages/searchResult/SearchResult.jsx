@@ -5,37 +5,26 @@ import { useState, useEffect } from "react"
 import Sidebar from '../../components/sidebar/Sidebar'
 import Rightbar from '../../components/rightbar/Rightbar'
 import Pagination from '../../components/pagination/Pagination'
-import { authData } from '../../authentication/authData'
-import { Login } from '../../authentication/authActions'
+import { ApiSetVacancies } from '../../apiCalls/vacancies'
+import { authData } from "../../models/authData" 
+import { ApiLogin } from "../../apiCalls/auth" 
 
 export default function SearchResult() {
-   let searchValue = localStorage.getItem("searchValue")
+   let searchValue = sessionStorage.getItem("searchValue")
+if(searchValue === "undefined") searchValue = ""
+
     const [searchResult, setResult] = useState({totalItems:null, totalPages:null, items:[]});
     const [page, setPage] = useState(1); 
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [categoryId, setCategoryId] = useState(0);
     useEffect(() => {
-      (async () => {
-        await fetch('https://localhost:7159/api/Vacancies?'+ new URLSearchParams({
-          CategoryId:categoryId,
-          Page:page,
-          Header: searchValue,
-          ItemsPerPage: itemsPerPage
-        }),{
-          method:'GET',
-        })
-        .then(response => response.json())
-        .then(data => {
-          setResult(data)
-          if(data.totalPages === 0 || data.totalPages < page)
-          setPage(1)
-          })
-        
-      })();
+      ApiSetVacancies(categoryId, page, itemsPerPage, searchValue, setResult, setPage)
     }, [page,itemsPerPage, categoryId]);
 
-    if(!authData.loginState)
-    Login({email: "admin@test.com", password: "12345678"});
+  //  if(!authData.loginState)
+   // Login({email: "admin@test.com", password: "12345678"});
+
+   
 
     const handleNextPage = (numPages) => {
       if(searchResult.totalPages !== page) {

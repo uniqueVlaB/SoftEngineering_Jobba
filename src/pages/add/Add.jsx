@@ -4,8 +4,10 @@ import Topbar from '../../components/topbar/Topbar';
 import Rightbar from '../../components/rightbar/Rightbar';
 import Feed from '../../components/feed/Feed';
 import AddForm from '../../components/addForm/AddForm';
+import { useEffect } from 'react';
 
 export default function Add() {
+  
   return (
     <>
       <Topbar/>

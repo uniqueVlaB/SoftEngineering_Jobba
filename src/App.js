@@ -36,7 +36,7 @@ function App() {
       element: <Add/>,
     }
   ]);
- 
+  
   return (
     <RouterProvider router={router} />
   );

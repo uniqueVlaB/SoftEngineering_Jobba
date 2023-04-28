@@ -2,51 +2,38 @@ import Feed from '../../components/feed/Feed'
 import Rightbar from '../../components/rightbar/Rightbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
-import { useState, useEffect } from "react"
-import { authData } from '../../authentication/authData'
-import { Login } from '../../authentication/authActions'
+import { useState, useEffect} from "react"
+import { authData } from "../../models/authData" 
+import { ApiLogin } from "../../apiCalls/auth" 
 import Pagination from '../../components/pagination/Pagination'
 import { useNavigate } from 'react-router-dom'
 import './userPage.css'
+import { ApiSetUserVacancies } from '../../apiCalls/vacancies'
 
 export default function UserPage() {
     const navigate = useNavigate();
-    const [userVacantions, setVacancies] = useState({totalItems:null, totalPages:null, items:[]});
+    const [userVacancies, setUserVacancies] = useState(() => {
+      const storedData = sessionStorage.getItem("userVacancies");
+      return storedData ? JSON.parse(storedData) : {totalItems:null, totalPages:null, items:[]};
+    });
     const [page, setPage] = useState(1); 
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [categoryId, setCategoryId] = useState(0);
-  
-  
-    useEffect(() => {
-      (async () => {
-        await fetch('https://localhost:7159/api/Vacancies/MyVacancies?'+ new URLSearchParams({
-          CategoryId:categoryId,
-          Page:page,
-          Header: "",
-          ItemsPerPage: itemsPerPage
-        }),{
-          method:'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization':'Bearer ' + authData.token
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          setVacancies(data)
-          if(data.totalPages === 0 || data.totalPages < page)
-          setPage(1)
-          })
-        
-      })();
-    }, [page,itemsPerPage, categoryId]);
+
     
-    if(!authData.loginState)
-      Login({email: "admin@test.com", password: "12345678"});
-  
+    useEffect(() => {
+      ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
+    }, [page,itemsPerPage, categoryId, userVacancies]);
+    
+    useEffect(() => {
+      sessionStorage.setItem("userVacancies", JSON.stringify(userVacancies));
+    }, [userVacancies]);
+
+   // if(!authData.loginState)
+   // Login({email: "admin@test.com", password: "12345678"});
+    
     const handleNextPage = (numPages) => {
-      if(userVacantions.totalPages !== page) {
+      if(userVacancies.totalPages !== page) {
         setPage(page+numPages);
       }
     }
@@ -57,7 +44,7 @@ export default function UserPage() {
       }
     }
     const handleSetPage = (numPages) => {
-      if(numPages > 0 && userVacantions.totalPages >= numPages) {
+      if(numPages > 0 && userVacancies.totalPages >= numPages) {
         setPage(numPages);
       }
     }
@@ -73,13 +60,13 @@ export default function UserPage() {
          
         <Sidebar/>
        
-   <Feed data={userVacantions} allowEdit = {true} setItems={setItemsPerPage} numItemsPerPage = {itemsPerPage}>
+   <Feed data={userVacancies} allowEdit = {true} setItems={setItemsPerPage} numItemsPerPage = {itemsPerPage}>
    <Pagination
             onPrevPageClick={handlePrevPage}
             onNextPageClick={handleNextPage}
             setPage={handleSetPage}
             currentPage={page}
-            totalPages={userVacantions.totalPages} 
+            totalPages={userVacancies.totalPages} 
           />
         </Feed>
         <Rightbar

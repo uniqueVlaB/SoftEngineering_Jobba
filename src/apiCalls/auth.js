@@ -1,6 +1,6 @@
-import { authData } from "./authData";
+import { authData } from "../models/authData";
 
-export function Login({email, password}){
+export function ApiLogin({email, password}){
     (async () => {
         const rawResponse = await fetch('https://localhost:7159/api/login', {
           method: 'POST',
@@ -12,8 +12,12 @@ export function Login({email, password}){
           password: password})
         });
        const content = await rawResponse.json();
-       authData.loginState = true
        authData.userName = content.expiration
        authData.token = content.accessToken
+       authData.email = email
+       localStorage.setItem("authState","true")
+       localStorage.setItem("authToken",content.accessToken)
+       localStorage.setItem("authEmail",email)
+       localStorage.setItem("authUsername",content.accessToken)
       })();
 }

@@ -1,24 +1,20 @@
 import { useState, useEffect } from 'react'
 import './rightbar.css'
 import { json } from 'react-router-dom';
+import { ApiSetCategories } from '../../apiCalls/categories';
+import { categoriesModel } from '../../models/categories';
 
 export default function Rightbar(props) { 
- const [categories, setCategories] = useState([]);
+ const [categories, setCategories] = useState(categoriesModel);
+
  useEffect(() => {
-  (async () => {
-  await fetch('https://localhost:7159/api/Categories',{
-    method:'GET'
-  })
-  .then(response => response.json())
-  .then(data => {
-    setCategories(data)
-  localStorage.setItem("categories", JSON.stringify(data))
-  })
-})();
+ ApiSetCategories(setCategories)
 }, []);
+
   const handleChange = (event) => {
     props.categoryChange(event.target.value)
   }
+
   return (
     <div className='rightbarContainer'>
       <div className="rightbarWrapper">
