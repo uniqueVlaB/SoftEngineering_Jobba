@@ -18,6 +18,7 @@ export default function Card(props){
     }
     const handleDeteteClick = async () =>{
      ApiDeleteVacancy(props.vacancy) 
+     window.location.reload()
    }
   return(
   <div className='workCard'>

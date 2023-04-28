@@ -9,13 +9,12 @@ import Pagination from '../../components/pagination/Pagination'
 import { useNavigate } from 'react-router-dom'
 import './userPage.css'
 import { ApiSetUserVacancies } from '../../apiCalls/vacancies'
+import { vacanciesModel } from '../../models/vacancies'
+
 
 export default function UserPage() {
     const navigate = useNavigate();
-    const [userVacancies, setUserVacancies] = useState(() => {
-      const storedData = sessionStorage.getItem("userVacancies");
-      return storedData ? JSON.parse(storedData) : {totalItems:null, totalPages:null, items:[]};
-    });
+    const [userVacancies, setUserVacancies] = useState(vacanciesModel);
     const [page, setPage] = useState(1); 
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [categoryId, setCategoryId] = useState(0);
@@ -23,11 +22,8 @@ export default function UserPage() {
     
     useEffect(() => {
       ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
-    }, [page,itemsPerPage, categoryId, userVacancies]);
+    }, [page,itemsPerPage, categoryId]);
     
-    useEffect(() => {
-      sessionStorage.setItem("userVacancies", JSON.stringify(userVacancies));
-    }, [userVacancies]);
 
    // if(!authData.loginState)
    // Login({email: "admin@test.com", password: "12345678"});
