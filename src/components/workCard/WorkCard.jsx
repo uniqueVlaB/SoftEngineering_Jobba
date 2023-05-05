@@ -8,7 +8,7 @@ import { vacancy } from '../../models/vacancy';
 import { ApiDeleteVacancy } from '../../apiCalls/vacancies';
 
 export default function Card(props){
-  const descrLimit = 100
+  const descrLimit = 70
 let description = props.vacancy.description
 
 
