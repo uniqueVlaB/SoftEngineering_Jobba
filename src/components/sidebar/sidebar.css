@@ -22,6 +22,12 @@ padding: 10px;
 font-size: 24px;
 color: black;
 }
+.listPagesItem:hover{
+   background-color: silver;
+}
+.listPagesItem:active{
+   background-color: gray;
+}
 
 .listIcon{
    font-size: 28px !important;

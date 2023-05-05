@@ -4,27 +4,66 @@ import Feed from '../../components/feed/Feed'
 import { useState, useEffect } from "react"
 import Sidebar from '../../components/sidebar/Sidebar'
 import Rightbar from '../../components/rightbar/Rightbar'
+import Pagination from '../../components/pagination/Pagination'
+import { ApiSetVacancies } from '../../apiCalls/vacancies'
+import { authData } from "../../models/authData" 
+import { ApiLogin } from "../../apiCalls/auth" 
 
 export default function SearchResult() {
-   let searchValue = localStorage.getItem("searchValue")
-    const [searchResult, setResult] = useState([]);
-   useEffect(() => {
-     fetch('https://localhost:7184/vacancy/search/' + searchValue,{
-       method:'GET',
-       headers:{"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWViNTQyLTgxZWItNDNjMi05ZjU2LTVjY2JiMTdhOGJkOSIsIm5iZiI6MTY4MDYyNDU0MSwiZXhwIjoxOTk2MjQzNzQxLCJpYXQiOjE2ODA2MjQ1NDF9.SCxoDCaXgnCdE1fNjKUmTAOhFv_hvhdb0oVQL9qcUUc"}
-   })
-     .then(response => response.json())
-     .then(data => setResult(data))
-     }, []);
+   let searchValue = sessionStorage.getItem("searchValue")
+if(searchValue === "undefined") searchValue = ""
+
+    const [searchResult, setResult] = useState({totalItems:null, totalPages:null, items:[]});
+    const [page, setPage] = useState(1); 
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [categoryId, setCategoryId] = useState(0);
+    useEffect(() => {
+      ApiSetVacancies(categoryId, page, itemsPerPage, searchValue, setResult, setPage)
+    }, [page,itemsPerPage, categoryId]);
+
+  //  if(!authData.loginState)
+   // Login({email: "admin@test.com", password: "12345678"});
+
+   
+
+    const handleNextPage = (numPages) => {
+      if(searchResult.totalPages !== page) {
+        setPage(page+numPages);
+      }
+    }
+  
+    const handlePrevPage = (numPages) => {
+      if(page !== 1) {
+        setPage(page - numPages);
+      }
+    }
+    const handleSetPage = (numPages) => {
+      if(numPages > 0 && searchResult.totalPages >= numPages) {
+        setPage(numPages);
+      }
+    }
+    const handleCategoryChange = (categoryId) => {
+      if(categoryId!==null)
+        setCategoryId(categoryId);
+      
+    }
   return (
     <div>
         <Topbar/>
         <div className="searchContainer">
-         
         <Sidebar/>
-        
-   <Feed data={searchResult} label={{show: true, text: searchValue}}/>
-   <Rightbar/>
+   <Feed data={searchResult} label={{show: true, text: searchValue}} setItems={setItemsPerPage} numItemsPerPage = {itemsPerPage}>
+   <Pagination
+            onPrevPageClick={handlePrevPage}
+            onNextPageClick={handleNextPage}
+            setPage={handleSetPage}
+            currentPage={page}
+            totalPages={searchResult.totalPages}
+          />
+        </Feed>
+        <Rightbar
+         categoryChange={handleCategoryChange}
+        />
    </div>
     </div>
   )

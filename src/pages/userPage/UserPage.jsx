@@ -2,28 +2,72 @@ import Feed from '../../components/feed/Feed'
 import Rightbar from '../../components/rightbar/Rightbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
-import { useState, useEffect } from "react"
+import { useState, useEffect} from "react"
+import { authData } from "../../models/authData" 
+import { ApiLogin } from "../../apiCalls/auth" 
+import Pagination from '../../components/pagination/Pagination'
+import { useNavigate } from 'react-router-dom'
 import './userPage.css'
+import { ApiSetUserVacancies } from '../../apiCalls/vacancies'
+import { vacanciesModel } from '../../models/vacancies'
+
 
 export default function UserPage() {
-    const [userVacantions, setVacantions] = useState([]);
+    const navigate = useNavigate();
+    const [userVacancies, setUserVacancies] = useState(vacanciesModel);
+    const [page, setPage] = useState(1); 
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [categoryId, setCategoryId] = useState(0);
+
+    
     useEffect(() => {
-      fetch('https://localhost:7184/vacancy/UserVacantions',{
-        method:'GET',
-        headers:{"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWViNTQyLTgxZWItNDNjMi05ZjU2LTVjY2JiMTdhOGJkOSIsIm5iZiI6MTY4MDYyNDU0MSwiZXhwIjoxOTk2MjQzNzQxLCJpYXQiOjE2ODA2MjQ1NDF9.SCxoDCaXgnCdE1fNjKUmTAOhFv_hvhdb0oVQL9qcUUc"}
-    })
-      .then(response => response.json())
-      .then(data => setVacantions(data))
-      }, []);
+      ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
+    }, [page,itemsPerPage, categoryId]);
+    
+
+   // if(!authData.loginState)
+   // Login({email: "admin@test.com", password: "12345678"});
+    
+    const handleNextPage = (numPages) => {
+      if(userVacancies.totalPages !== page) {
+        setPage(page+numPages);
+      }
+    }
+  
+    const handlePrevPage = (numPages) => {
+      if(page !== 1) {
+        setPage(page - numPages);
+      }
+    }
+    const handleSetPage = (numPages) => {
+      if(numPages > 0 && userVacancies.totalPages >= numPages) {
+        setPage(numPages);
+      }
+    }
+    const handleCategoryChange = (categoryId) => {
+      if(categoryId!==null)
+        setCategoryId(categoryId);
+    }
+
   return (
     <div>
         <Topbar/>
         <div className="userPageContainer">
          
         <Sidebar/>
-        
-   <Feed data={userVacantions}/>
-   <Rightbar/>
+       
+   <Feed data={userVacancies} allowEdit = {true} setItems={setItemsPerPage} numItemsPerPage = {itemsPerPage}>
+   <Pagination
+            onPrevPageClick={handlePrevPage}
+            onNextPageClick={handleNextPage}
+            setPage={handleSetPage}
+            currentPage={page}
+            totalPages={userVacancies.totalPages} 
+          />
+        </Feed>
+        <Rightbar
+         categoryChange={handleCategoryChange}
+        />
    </div>
     </div>
   )

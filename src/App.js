@@ -8,6 +8,9 @@ import {
   Link,
 } from "react-router-dom";
 import UserPage from "./pages/userPage/UserPage";
+import Edit from "./pages/edit/Edit";
+import Add from "./pages/add/Add";
+import VacancyPage from "./pages/vacancyPage/VacancyPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,15 +21,27 @@ function App() {
       ),
     },
     {
-      path: "SearchResult",
+      path: "searchResult",
       element: <SearchResult/>,
     },
     {
-      path: "UserPage",
+      path: "userPage",
       element: <UserPage/>,
     },
+    {
+      path: "edit",
+      element: <Edit/>,
+    },
+    {
+      path: "add",
+      element: <Add/>,
+    },
+    {
+      path: "vacancyPage",
+      element: <VacancyPage/>,
+    }
   ]);
- 
+  
   return (
     <RouterProvider router={router} />
   );

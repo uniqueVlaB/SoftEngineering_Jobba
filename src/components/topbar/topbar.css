@@ -4,6 +4,7 @@ width: 100%;
 background-color: black;
 display: flex;
 align-items: center;
+position: -webkit-sticky;
 position: sticky;
 top:0;
 }
@@ -13,9 +14,13 @@ top:0;
  margin-left: 20px; 
  color:white;  
  cursor: pointer;
-
 }
-
+.logo:hover{
+    color: silver;
+}
+.logo:active{
+    color: gray;
+}
 .topbarLeft{
     flex:3;
 }
@@ -50,12 +55,18 @@ display: flex;
 cursor: pointer;
 float: right;
 margin-right: 10px;
-
+display: flex;
+}
+.topbarAccountIcon:hover{
+    color: silver;
+}
+.topbarAccountIcon:active{
+    color: gray;
 }
 .accountCircle{
     font-size: 40px !important;
 }
 
 .accountLoginState{
-align-self: center;   
+align-self: center;
 }

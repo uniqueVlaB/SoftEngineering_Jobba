@@ -2,13 +2,15 @@ import "./sidebar.css"
 import { Home, Person } from "@mui/icons-material"
 import {useNavigate } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar(props) {
   const navigate = useNavigate();
   const handleHomeClick=()=>{
-  navigate("/")
+    if(window.location.pathname !== "/")
+    navigate("/")
+    else window.location.reload()
   }
-  const handleYourAccountClick=()=>{
-    navigate("/UserPage")
+  const handleAccountClick=()=>{
+    navigate("/userPage")
     }
   return (
     <div className="sidebarContainer">
@@ -18,11 +20,10 @@ export default function Sidebar() {
         <Home className="listIcon"/>
         Home
       </li>
-      <li className="listPagesItem" onClick={handleYourAccountClick}>
+      <li className="listPagesItem" onClick={handleAccountClick}>
         <Person className="listIcon"/>
-        Your account
+        Your vacancies
       </li>
-     
      </ul>
      
      </div>

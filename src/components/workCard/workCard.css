@@ -1,5 +1,5 @@
 .workCard{
-cursor: pointer;
+    display: flex;
 border: solid black 2px;
 border-radius: 20px;
 padding: 10px;
@@ -17,4 +17,37 @@ margin-bottom: 10px;
 .workCardListItem{
 margin-bottom: 5px;
 
+}
+.cardValues{
+    flex: 8;
+    cursor: pointer;
+}
+.cardActions{
+    flex: 2;
+    display: flex;
+    align-items:center;
+}
+.actionButton{
+    flex:1;
+    margin: 10px;
+    width: 90px;
+    height: 40%;
+    border-radius: 10px;
+    border: solid 2px black;
+    background-color: white;
+    display: flex;
+    cursor: pointer;
+}
+.buttonText{
+    align-self: center;
+    font-size: 18px;
+}
+.buttonIcon{
+    align-self: center; 
+}
+.actionButton:hover{
+    background-color:silver;
+}
+.actionButton:active{
+    background-color:darkgrey;
 }

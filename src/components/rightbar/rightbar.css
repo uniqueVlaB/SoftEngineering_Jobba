@@ -5,3 +5,10 @@ flex:3;
 .rightbarWrapper{
 padding: 20px;    
 }
+.categorySelect{
+    border-radius: 10px;
+    width: 70%;
+    height: 30px;
+    font-size: 17px;
+    cursor: pointer;
+}

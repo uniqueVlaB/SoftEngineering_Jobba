@@ -1,0 +1,28 @@
+.listingContainer{
+display:flex;
+padding-right: 30%;
+padding-left: 30%;
+
+}
+.listingRight{
+flex: 1; 
+}
+.listingLeft{
+    cursor: pointer;
+flex: 1;  
+}
+.listingCenter{
+display: flex;
+text-align: center;
+flex: 6;  
+}
+.arrowForward{
+    cursor: pointer;
+ float: right;
+}
+.listingNum{
+    cursor: pointer;
+align-self: center;
+    flex:1;
+}
+

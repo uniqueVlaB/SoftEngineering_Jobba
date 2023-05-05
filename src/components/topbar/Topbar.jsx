@@ -3,9 +3,11 @@ import { Search, Person, AccountCircle, Refresh } from "@mui/icons-material"
 import { useEffect, useState } from "react";
 import Feed from "../feed/Feed";
 import {useNavigate } from "react-router-dom";
+import { authData } from "../../models/authData";
 
-export default function Topbar() {
+export default function Topbar(props) {
   let searchValue
+  let authState = localStorage.getItem("authState")
   const search = useInput();
   const navigate = useNavigate();
   function useInput(defaultValue) {
@@ -25,15 +27,29 @@ export default function Topbar() {
     else window.location.reload()
 
   }
+
+  const handleAccountClick=()=>{
+    if(authData.loginState){
+      //---redirect to accout page
+     // navigate("/")
+    }
+    else{
+       //---redirect to login page
+     // navigate("/")
+    }
+
+  }
+
   
   
   const handleKeyDown = (event)=>{
     if (event.key === 'Enter') {
       console.log('do validate');
-      localStorage.setItem("searchValue", searchValue)
+      sessionStorage.setItem("searchValue", searchValue)
       if(window.location.pathname !== "/SearchResult")
        navigate("/SearchResult")
        else window.location.reload()
+       
     }
   };
   return (
@@ -56,8 +72,8 @@ export default function Topbar() {
 {search.value}
 
 
-<div className="topbarAccountIcon">
-<span className="accountLoginState">You are logged in</span>
+<div className="topbarAccountIcon" onClick={handleAccountClick}>
+<span className="accountLoginState">{authState === "true" && "Log out"}{authState !== "true" && "Log in"}</span>
   <AccountCircle className="accountCircle"/>
 </div>
 </div>
