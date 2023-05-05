@@ -1,6 +1,5 @@
 .workCard{
     display: flex;
-cursor: pointer;
 border: solid black 2px;
 border-radius: 20px;
 padding: 10px;
@@ -21,6 +20,7 @@ margin-bottom: 5px;
 }
 .cardValues{
     flex: 8;
+    cursor: pointer;
 }
 .cardActions{
     flex: 2;
@@ -36,6 +36,7 @@ margin-bottom: 5px;
     border: solid 2px black;
     background-color: white;
     display: flex;
+    cursor: pointer;
 }
 .buttonText{
     align-self: center;

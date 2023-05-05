@@ -8,8 +8,14 @@ import { vacancy } from '../../models/vacancy';
 import { ApiDeleteVacancy } from '../../apiCalls/vacancies';
 
 export default function Card(props){
+  const descrLimit = 100
+let description = props.vacancy.description
+
+
+if(description.length > descrLimit){
+description = description.slice(0, descrLimit-3) + "..."
+}
   const navigate = useNavigate()
-    const [showMore, setShowMore] = useState(false);
   
     const handleEditClick = () => {
      // localStorage.setItem("vacancy", JSON.stringify(props.vacancy));
@@ -20,16 +26,18 @@ export default function Card(props){
      ApiDeleteVacancy(props.vacancy) 
      window.location.reload()
    }
+   const handleVacancyClick = async () =>{
+    sessionStorage.setItem("vacancy", JSON.stringify(props.vacancy)) 
+    navigate("/vacancyPage")
+  }
   return(
   <div className='workCard'>
-    <div className="cardValues">
+    <div className="cardValues" onClick={handleVacancyClick}>
       <h2 className='workCardh2'>
-    {props.vacancy.header === "" || props.vacancy.header === " " ?"Unknown": props.vacancy.header}
+    {props.vacancy.header}
   </h2>
   <h3 className='workCardh3'>
-    
-  {props.vacancy.description === "" || props.vacancy.description === " " ?"Unknown": props.vacancy.description}
-   
+  {description}
   </h3>
   <h4>
     {props.vacancy.category.name}

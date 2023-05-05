@@ -10,6 +10,7 @@ import {
 import UserPage from "./pages/userPage/UserPage";
 import Edit from "./pages/edit/Edit";
 import Add from "./pages/add/Add";
+import VacancyPage from "./pages/vacancyPage/VacancyPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -34,6 +35,10 @@ function App() {
     {
       path: "add",
       element: <Add/>,
+    },
+    {
+      path: "vacancyPage",
+      element: <VacancyPage/>,
     }
   ]);
   
