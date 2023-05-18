@@ -1,13 +1,11 @@
-import { Event } from '@mui/icons-material';
 import  './editForm.css'
 import { useState } from 'react';
-import { authData } from '../../models/authData';
 import SaveIcon from '@mui/icons-material/Save';
 import { useNavigate } from 'react-router-dom';
 import { vacancy } from '../../models/vacancy';
 import { ApiSaveVacancy } from '../../apiCalls/vacancies';
 
-export default function EditForm(props) {
+export default function EditForm() {
     const navigate = useNavigate()
     const [categoryId, setCategoryId] = useState(vacancy.category.id)
     const [headerValue, setHeaderValue] = useState(vacancy.header);

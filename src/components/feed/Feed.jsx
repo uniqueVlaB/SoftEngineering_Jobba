@@ -1,7 +1,6 @@
 import "./feed.css"
 import WorkCard from "../../components/workCard/WorkCard"
 import { useEffect, useRef } from "react"
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Feed({data: vacancies = {items: []}, label = {show:false},numItemsPerPage, setItems, allowEdit = false, enableCards = true,topElement, children}) {

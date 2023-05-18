@@ -6,8 +6,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Rightbar from '../../components/rightbar/Rightbar'
 import Pagination from '../../components/pagination/Pagination'
 import { ApiSetVacancies } from '../../apiCalls/vacancies'
-import { authData } from "../../models/authData" 
-import { ApiLogin } from "../../apiCalls/auth" 
+
 
 export default function SearchResult() {
    let searchValue = sessionStorage.getItem("searchValue")
@@ -19,12 +18,7 @@ if(searchValue === "undefined") searchValue = ""
     const [categoryId, setCategoryId] = useState(0);
     useEffect(() => {
       ApiSetVacancies(categoryId, page, itemsPerPage, searchValue, setResult, setPage)
-    }, [page,itemsPerPage, categoryId]);
-
-  //  if(!authData.loginState)
-   // Login({email: "admin@test.com", password: "12345678"});
-
-   
+    }, [page,itemsPerPage, categoryId, searchValue]);
 
     const handleNextPage = (numPages) => {
       if(searchResult.totalPages !== page) {

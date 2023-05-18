@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import './workCard.css';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { authData } from '../../models/authData';
 import { vacancy } from '../../models/vacancy';
 import { ApiDeleteVacancy } from '../../apiCalls/vacancies';
 
@@ -18,7 +16,6 @@ description = description.slice(0, descrLimit-3) + "..."
   const navigate = useNavigate()
   
     const handleEditClick = () => {
-     // localStorage.setItem("vacancy", JSON.stringify(props.vacancy));
       vacancy = props.vacancy
       navigate("/edit")
     }
