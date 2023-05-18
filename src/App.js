@@ -3,17 +3,16 @@ import Home from "./pages/home/Home"
 import SearchResult from "./pages/searchResult/SearchResult";
 import {
   createBrowserRouter,
-  RouterProvider} from "react-router-dom";
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
 import UserPage from "./pages/userPage/UserPage";
-import Edit from "./pages/edit/Edit";
-import Add from "./pages/add/Add";
+import EditVacancy from "./pages/editVacancy/EditVacancy";
+import AddVacancy from "./pages/addVacancy/AddVacancy";
 import VacancyPage from "./pages/vacancyPage/VacancyPage";
-<<<<<<< Updated upstream
-=======
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
->>>>>>> Stashed changes
-
 function App() {
   const router = createBrowserRouter([
     {
@@ -32,15 +31,23 @@ function App() {
     },
     {
       path: "edit",
-      element: <Edit/>,
+      element: <EditVacancy/>,
     },
     {
       path: "add",
-      element: <Add/>,
+      element: <AddVacancy/>,
     },
     {
       path: "vacancyPage",
       element: <VacancyPage/>,
+    },
+    {
+      path: "login",
+      element: <Login/>,
+    },
+    {
+      path: "register",
+      element: <Register/>,
     }
   ]);
   

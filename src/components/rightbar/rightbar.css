@@ -3,7 +3,7 @@ flex:3;
 
 }
 .rightbarWrapper{
-padding: 20px;    
+padding: 20px;   
 }
 .categorySelect{
     border-radius: 10px;
@@ -11,4 +11,70 @@ padding: 20px;
     height: 30px;
     font-size: 17px;
     cursor: pointer;
+
+}
+.categoryInput{
+    width: 60%;
+    height: 30px;
+    border-radius: 20px;
+    padding-left: 10px;
+    font-size: 18px;
+
+}
+.saveCategoryButton{
+  margin-left: 10px;
+  width: 100px;
+  height: 35px;  
+  border-radius: 20px;
+  font-size: 20px;
+  align-content: center;
+  background-color: white;   
+}
+.saveCategoryButton:hover{
+    background-color:silver;
+}
+.saveCategoryButton:active{
+    background-color:darkgrey;
+}
+.saveCategoryIcon{
+}
+.categoryEditContainer{
+    margin-top: 10px;
+    display: flex;
+}
+.deleteCategoryButton{
+    margin-left: 10px;
+    width: 100px;
+    height: 35px;  
+    border-radius: 20px;
+    font-size: 20px;
+    align-items: center;
+    background-color: white;  
+   
+}
+.deleteCategoryButton:hover{
+    background-color:silver;
+}
+.deleteCategoryButton:active{
+    background-color:darkgrey;
+}
+.buttonText{
+    display: flex;
+    align-items: center;
+}
+.addCategoryButton{
+    margin-left: 10px;
+    width: 100px;
+    height: 35px;  
+    border-radius: 20px;
+    font-size: 20px;
+    align-content: center;
+    background-color: white;   
+
+}
+.addCategoryButton:hover{
+    background-color:silver;
+}
+.addCategoryButton:active{
+    background-color:darkgrey;
 }

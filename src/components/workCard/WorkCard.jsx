@@ -20,7 +20,7 @@ description = description.slice(0, descrLimit-3) + "..."
       navigate("/edit")
     }
     const handleDeteteClick = async () =>{
-     ApiDeleteVacancy(props.vacancy) 
+      await ApiDeleteVacancy(props.vacancy) 
      window.location.reload()
    }
    const handleVacancyClick = async () =>{

@@ -1,16 +1,13 @@
-import './add.css'
+import './addVacancy.css'
 import Sidebar from '../../components/sidebar/Sidebar';
 import Topbar from '../../components/topbar/Topbar';
 import Rightbar from '../../components/rightbar/Rightbar';
 import Feed from '../../components/feed/Feed';
 import AddForm from '../../components/addForm/AddForm';
+import { useEffect } from 'react';
 
-<<<<<<< Updated upstream:src/pages/add/Add.jsx
-export default function Add() {
-  
-=======
 export default function AddVacancy() {
->>>>>>> Stashed changes:src/pages/addVacancy/AddVacancy.jsx
+  
   return (
     <>
       <Topbar/>

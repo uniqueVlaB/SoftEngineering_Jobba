@@ -13,7 +13,7 @@ export default function EditForm(props) {
     const categories = JSON.parse(sessionStorage.getItem("categories"))
     
  const saveChanges = async () =>{
-    ApiSaveVacancy(headerValue, descriptionValue, categoryId)
+    await ApiSaveVacancy(headerValue, descriptionValue, categoryId)
 navigate("/userPage")
 }
     const handleChange = (event) => {
