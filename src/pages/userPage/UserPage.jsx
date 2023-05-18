@@ -21,13 +21,11 @@ export default function UserPage() {
 
     
     useEffect(() => {
+      if(sessionStorage.getItem("authState") !== "true") navigate("/login")
      ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
     }, [page,itemsPerPage, categoryId]);
     
 
-   // if(!authData.loginState)
-   // Login({email: "admin@test.com", password: "12345678"});
-    
     const handleNextPage = (numPages) => {
       if(userVacancies.totalPages !== page) {
         setPage(page+numPages);

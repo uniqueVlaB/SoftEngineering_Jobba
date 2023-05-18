@@ -3,6 +3,7 @@ import { Home, Person } from "@mui/icons-material"
 import {useNavigate } from "react-router-dom";
 
 export default function Sidebar(props) {
+  const authState = sessionStorage.getItem("authState")
   const navigate = useNavigate();
   const handleHomeClick=()=>{
     if(window.location.pathname !== "/")
@@ -10,7 +11,9 @@ export default function Sidebar(props) {
     else window.location.reload()
   }
   const handleAccountClick=()=>{
+    if(authState === "true")
     navigate("/userPage")
+    else alert("login first")
     }
   return (
     <div className="sidebarContainer">

@@ -36,8 +36,6 @@ padding: 20px;
 .saveCategoryButton:active{
     background-color:darkgrey;
 }
-.saveCategoryIcon{
-}
 .categoryEditContainer{
     margin-top: 10px;
     display: flex;
