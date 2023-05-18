@@ -3,8 +3,6 @@ import Rightbar from '../../components/rightbar/Rightbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import { useState, useEffect} from "react"
-import { authData } from "../../models/authData" 
-import { ApiLogin } from "../../apiCalls/auth" 
 import Pagination from '../../components/pagination/Pagination'
 import { useNavigate } from 'react-router-dom'
 import './userPage.css'
@@ -21,13 +19,16 @@ export default function UserPage() {
 
     
     useEffect(() => {
+<<<<<<< Updated upstream
       ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
     }, [page,itemsPerPage, categoryId]);
     
+=======
+        if(sessionStorage.getItem("authState") !== "true") navigate("/login")
+     ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
+    }, [page,itemsPerPage, categoryId, navigate]);
+>>>>>>> Stashed changes
 
-   // if(!authData.loginState)
-   // Login({email: "admin@test.com", password: "12345678"});
-    
     const handleNextPage = (numPages) => {
       if(userVacancies.totalPages !== page) {
         setPage(page+numPages);

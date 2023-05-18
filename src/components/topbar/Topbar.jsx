@@ -1,11 +1,13 @@
 import "./topbar.css"
-import { Search, Person, AccountCircle, Refresh } from "@mui/icons-material"
-import { useEffect, useState } from "react";
-import Feed from "../feed/Feed";
+import { Search,AccountCircle,} from "@mui/icons-material"
+import {useState } from "react";
 import {useNavigate } from "react-router-dom";
+<<<<<<< Updated upstream
 import { authData } from "../../models/authData";
+=======
+>>>>>>> Stashed changes
 
-export default function Topbar(props) {
+export default function Topbar() {
   let searchValue
   let authState = localStorage.getItem("authState")
   const search = useInput();
@@ -21,7 +23,7 @@ export default function Topbar(props) {
     };
   }
 
-  const handleLogoClick = (event)=>{
+  const handleLogoClick = ()=>{
     if(window.location.pathname !== "/")
     navigate("/")
     else window.location.reload()
@@ -40,8 +42,6 @@ export default function Topbar(props) {
 
   }
 
-  
-  
   const handleKeyDown = (event)=>{
     if (event.key === 'Enter') {
       console.log('do validate');

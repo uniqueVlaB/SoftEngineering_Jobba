@@ -4,16 +4,11 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Feed from '../../components/feed/Feed'
 import Rightbar from '../../components/rightbar/Rightbar'
 import { useState, useEffect } from "react"
-import { authData } from "../../models/authData" 
-import { ApiLogin } from "../../apiCalls/auth" 
-import { useNavigate } from "react-router-dom"
-import { useRef } from "react";
 import Pagination from "../../components/pagination/Pagination"
 import { ApiSetVacancies } from "../../apiCalls/vacancies"
 import { vacanciesModel } from "../../models/vacancies"
 
-export default function Home(props) {
-  let authState = localStorage.getItem("authState")
+export default function Home() {
 
   const [vacancies, setVacancies] = useState(vacanciesModel);
   const [page, setPage] = useState(1); 
@@ -23,9 +18,6 @@ export default function Home(props) {
   useEffect(() => {
     ApiSetVacancies(categoryId, page, itemsPerPage, "", setVacancies, setPage)
   }, [page,itemsPerPage, categoryId]);
-  
-  //if(authState !== "true")
-    //ApiLogin({email: "admin@test.com", password: "12345678"});
 
   const handleNextPage = (numPages) => {
     if(vacancies.totalPages !== page) {

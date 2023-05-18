@@ -1,7 +1,6 @@
 import "./pagination.css"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useRef } from "react";
 
 export default function Pagination(props) {
     const handleRightClick = (num)=>{

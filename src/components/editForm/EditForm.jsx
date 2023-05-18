@@ -1,7 +1,5 @@
-import { Event } from '@mui/icons-material';
 import  './editForm.css'
 import { useState } from 'react';
-import { authData } from '../../models/authData';
 import SaveIcon from '@mui/icons-material/Save';
 import { useNavigate } from 'react-router-dom';
 import { vacancy } from '../../models/vacancy';
