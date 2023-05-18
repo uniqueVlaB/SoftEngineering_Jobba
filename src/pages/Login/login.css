@@ -1,0 +1,5 @@
+.loginContainer{
+    align-items: center;
+    width: 100%;
+    height: calc(100vmin - 50px);
+    }

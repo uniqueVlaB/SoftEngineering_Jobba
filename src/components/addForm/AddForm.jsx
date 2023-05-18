@@ -15,7 +15,7 @@ export default function AddForm() {
    
 
  const addVacancy = async () =>{
-    ApiAddVacancy(headerValue, descriptionValue, categoryId)
+    await ApiAddVacancy(headerValue, descriptionValue, categoryId)
       navigate("/userPage")
  }
  const handleChange = (event) => {

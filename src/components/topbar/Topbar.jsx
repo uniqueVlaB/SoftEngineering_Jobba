@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import Feed from "../feed/Feed";
 import {useNavigate } from "react-router-dom";
 import { authData } from "../../models/authData";
+import { ApiLogin } from "../../apiCalls/auth";
 
 export default function Topbar(props) {
   let searchValue
-  let authState = localStorage.getItem("authState")
+  let authState = sessionStorage.getItem("authState")
   const search = useInput();
   const navigate = useNavigate();
   function useInput(defaultValue) {
@@ -28,14 +29,16 @@ export default function Topbar(props) {
 
   }
 
-  const handleAccountClick=()=>{
-    if(authData.loginState){
-      //---redirect to accout page
-     // navigate("/")
+  const handleAccountClick= async ()=>{
+    if(authState !== "true"){
+      navigate("/login")
     }
     else{
-       //---redirect to login page
-     // navigate("/")
+      sessionStorage.removeItem("authState")
+      sessionStorage.removeItem("authEmail")
+      sessionStorage.removeItem("authUsername")
+      sessionStorage.removeItem("authToken")
+      navigate("/")
     }
 
   }

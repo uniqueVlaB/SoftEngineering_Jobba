@@ -11,7 +11,7 @@ import { vacancy } from "../models/vacancy"
     headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + localStorage.getItem("authToken")
+    'Authorization': 'Bearer ' + sessionStorage.getItem("authToken")
     }
     })
     .then(response => response.json())
@@ -45,7 +45,7 @@ import { vacancy } from "../models/vacancy"
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization':'Bearer ' + localStorage.getItem("authToken")
+            'Authorization':'Bearer ' + sessionStorage.getItem("authToken")
           },
           body: JSON.stringify({
             header: headerValue,
@@ -63,7 +63,7 @@ export async function ApiAddVacancy(headerValue, descriptionValue, categoryId) {
            headers: {
                'Accept': 'application/json',
                'Content-Type': 'application/json',
-               'Authorization':'Bearer ' + localStorage.getItem("authToken")
+               'Authorization':'Bearer ' + sessionStorage.getItem("authToken")
              },
              body: JSON.stringify({
                header: headerValue,
@@ -79,7 +79,7 @@ export async function ApiDeleteVacancy(vacancyy) {
    await fetch('https://localhost:7159/api/Vacancies/' + vacancyy.id,{
       method:'DELETE',
       headers: {
-          'Authorization':'Bearer ' + localStorage.getItem("authToken")
+          'Authorization':'Bearer ' + sessionStorage.getItem("authToken")
         },
     }).then(response => console.log(response.status))
                }

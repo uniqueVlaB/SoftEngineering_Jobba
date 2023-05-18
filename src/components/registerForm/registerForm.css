@@ -1,0 +1,44 @@
+.registerFormContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.registerForm{
+    margin-top: 25vh;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+}
+.title{
+    margin-bottom: 10px;
+}
+.valueInput{
+ padding: 10px;   
+ margin-bottom: 20px;
+ width: 300px;
+ font-weight: 500;
+ font-size: 16px;
+}
+.submitButton{
+  width: 40%;
+  height: 40px;  
+  border-radius: 20px;
+  font-size: 20px;
+  text-align: center;
+  background-color: white;   
+}
+.submitButton:hover{
+background-color: silver;
+}
+.submitButton:active{
+    background-color: darkgray;
+}
+.loginRow{
+    margin-top: 20px;
+}
+.loginWord{
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+}

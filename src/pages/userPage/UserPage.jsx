@@ -21,7 +21,7 @@ export default function UserPage() {
 
     
     useEffect(() => {
-      ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
+     ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
     }, [page,itemsPerPage, categoryId]);
     
 
@@ -53,9 +53,7 @@ export default function UserPage() {
     <div>
         <Topbar/>
         <div className="userPageContainer">
-         
         <Sidebar/>
-       
    <Feed data={userVacancies} allowEdit = {true} setItems={setItemsPerPage} numItemsPerPage = {itemsPerPage}>
    <Pagination
             onPrevPageClick={handlePrevPage}
@@ -66,6 +64,7 @@ export default function UserPage() {
           />
         </Feed>
         <Rightbar
+        categoryEdit = {true}
          categoryChange={handleCategoryChange}
         />
    </div>
