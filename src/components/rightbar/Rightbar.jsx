@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import './rightbar.css'
 import SaveIcon from '@mui/icons-material/Save';
-import { ApiSetCategories } from '../../apiCalls/categories';
 import { categoriesModel } from '../../models/categories';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import { ApiAddCategory } from '../../apiCalls/categories';
+import {ApiAddCategory, ApiDeleteCategory, ApiSaveCategory, ApiSetCategories } from '../../apiCalls/categories';
 
 export default function Rightbar(props) { 
  const [categories, setCategories] = useState(categoriesModel);
+ const [selectedCategoryId, setSelectedCategoryId] = useState();
  const [inputCategoryValue, setSelectedCategory] = useState("");
  const [addButtonDisabled, setAddButtonDisabled] = useState(false);
  const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
@@ -19,6 +19,7 @@ export default function Rightbar(props) {
 }, []);
 
   const handleChange = (event) => {
+    setSelectedCategoryId(event.target.value)
     props.categoryChange(event.target.value)
     if(event.target.value <= 0){
     setSelectedCategory("")
@@ -27,7 +28,9 @@ setDeleteButtonDisabled(true)
 setSaveButtonDisabled(true)
     }
     else{
-    setSelectedCategory(categories[event.target.value-1].name)
+      const selectedIndex = event.target.selectedIndex;
+      const selectedOptionText = event.target.options[selectedIndex].text;
+    setSelectedCategory(selectedOptionText)
     setAddButtonDisabled(true)
     setDeleteButtonDisabled(false)
     setSaveButtonDisabled(false)
@@ -38,13 +41,16 @@ setSaveButtonDisabled(true)
     setSelectedCategory(event.target.value)
   }
 
-  const handleDeleteCategory = (event) => {
-alert("delete")
-  }
-
-  const handleSaveCategory = (event) => {
-alert("save")
-  }
+  const handleDeleteCategory = async () => {
+    await ApiDeleteCategory(selectedCategoryId)
+    await ApiSetCategories(setCategories)
+    window.location.reload()
+    }
+  
+    const handleSaveCategory = async () => {
+   await ApiSaveCategory(inputCategoryValue, selectedCategoryId)
+   window.location.reload()
+    }
 
   const handleAddCategory = async () => {
 await ApiAddCategory(inputCategoryValue)
