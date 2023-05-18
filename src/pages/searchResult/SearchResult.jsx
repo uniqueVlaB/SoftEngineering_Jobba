@@ -7,6 +7,7 @@ import Rightbar from '../../components/rightbar/Rightbar'
 import Pagination from '../../components/pagination/Pagination'
 import { ApiSetVacancies } from '../../apiCalls/vacancies'
 
+
 export default function SearchResult() {
    let searchValue = sessionStorage.getItem("searchValue")
 if(searchValue === "undefined") searchValue = ""

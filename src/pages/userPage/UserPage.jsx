@@ -3,8 +3,6 @@ import Rightbar from '../../components/rightbar/Rightbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import { useState, useEffect} from "react"
-import { authData } from "../../models/authData" 
-import { ApiLogin } from "../../apiCalls/auth" 
 import Pagination from '../../components/pagination/Pagination'
 import { useNavigate } from 'react-router-dom'
 import './userPage.css'
@@ -23,7 +21,7 @@ export default function UserPage() {
     useEffect(() => {
       if(sessionStorage.getItem("authState") !== "true") navigate("/login")
      ApiSetUserVacancies(categoryId, page, itemsPerPage, setUserVacancies, setPage)  
-    }, [page,itemsPerPage, categoryId]);
+    }, [page,itemsPerPage, categoryId, navigate]);
     
 
     const handleNextPage = (numPages) => {

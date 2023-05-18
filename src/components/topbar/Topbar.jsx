@@ -1,10 +1,7 @@
 import "./topbar.css"
-import { Search, Person, AccountCircle, Refresh } from "@mui/icons-material"
-import { useEffect, useState } from "react";
-import Feed from "../feed/Feed";
+import { Search, AccountCircle} from "@mui/icons-material"
+import { useState } from "react";
 import {useNavigate } from "react-router-dom";
-import { authData } from "../../models/authData";
-import { ApiLogin } from "../../apiCalls/auth";
 
 export default function Topbar(props) {
   let searchValue
@@ -22,7 +19,7 @@ export default function Topbar(props) {
     };
   }
 
-  const handleLogoClick = (event)=>{
+  const handleLogoClick = ()=>{
     if(window.location.pathname !== "/")
     navigate("/")
     else window.location.reload()
